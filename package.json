@@ -1,7 +1,8 @@
 {
 	"name": "gitlab-pipelines",
+	"publisher": "jameswain",
 	"displayName": "GitLab Pipelines",
-	"description": "GitLab PipelinesMonitor",
+	"description": "GitLab Pipelines Monitor",
 	"version": "0.0.1",
 	"engines": {
 		"vscode": "^1.61.0"
