@@ -10,8 +10,7 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:gitlab-pipelines.helloWorld",
-		"onView:GitLab-Pipelines"
+		"workspaceContains:.gitlab-ci.yml"
 	],
 	"main": "./out/extension.js",
 	"contributes": {

@@ -1,70 +1,32 @@
-# gitlab-pipelines README
+[![Version](https://vsmarketplacebadge.apphb.com/version-short/balazs4.gitlab-pipeline-monitor.svg?style=flat-square)](https://marketplace.visualstudio.com/items?itemName=balazs4.gitlab-pipeline-monitor)
 
-This is the README for your extension "gitlab-pipelines". After writing up a brief description, we recommend including the following sections.
+# GitLab Pipelines
+
+> 这个插件可以实时监控当前仓库最新的20条pipeline状态
 
 ## Features
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+> 这个插件会在左侧树菜单展示当前仓库最新20pipeline的状态
 
-For example if there is an image subfolder under your extension project workspace:
+![](https://img.ikstatic.cn/MTYzMzg3NDA3NzUyNiMyMTkjanBn.jpg)
 
-\!\[feature X\]\(images/feature-x.png\)
+## 要求
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+这个插件只有当前打开的工作空间存在`.gitlab-ci.yml`文件才会启动
 
-## Requirements
+## 插件配置
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+在`settings.json`文件中添加以下配置：
 
-## Extension Settings
+```json
+"GitLabPipelines": {
+  "code.com": {      						// 自己公司对应的gitlab域名
+    "token": "123HJG23DCAXSDAS",// 在你的GitLab的 Personal Access Token 菜单中进行创建
+    "interval": 3000						//  更新时间
+  }
+}
+```
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+创建 [Gitlab Personal Access Token](https://docs.gitlab.com/ce/user/profile/personal_access_tokens.html) 如下图所示：
 
-For example:
-
-This extension contributes the following settings:
-
-* `myExtension.enable`: enable/disable this extension
-* `myExtension.thing`: set to `blah` to do something
-
-## Known Issues
-
-Calling out known issues can help limit users opening duplicate issues against your extension.
-
-## Release Notes
-
-Users appreciate release notes as you update your extension.
-
-### 1.0.0
-
-Initial release of ...
-
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
------------------------------------------------------------------------------------------------------------
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-**Note:** You can author your README using Visual Studio Code.  Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux)
-* Toggle preview (`Shift+CMD+V` on macOS or `Shift+Ctrl+V` on Windows and Linux)
-* Press `Ctrl+Space` (Windows, Linux) or `Cmd+Space` (macOS) to see a list of Markdown snippets
-
-### For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+![](https://img.ikstatic.cn/MTYzMzg3NDU5MzA1NSM2ODQjanBn.jpg)
