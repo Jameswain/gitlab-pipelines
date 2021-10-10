@@ -49,12 +49,13 @@ export async function updatePipelinesStatus(tvp: TreeViewProvider, config: any) 
 		'success': icon.success || ['✅'],
 		'skipped': icon.skipped || ['🚥'],
 		'running': icon.running || ['🥩', '🍗', '🍖', '🍔', '🍞', '🥯', '🍟', '🍺', '🥃', '🍾', '🍹'],
-		'failed': icon.failed || ['❌']
+		'failed': icon.failed || ['❌'],
+		'canceled': icon.canceled || ['⛔️']
 	};
 	pipelines = arrLastPipelines.map((pipeline: any) => {
 		const arrIcon = MAP_CION[pipeline.status] || [];
 		return createMenu({ 
-			label: `${arrIcon[index % arrIcon.length]}   ${pipeline.id} - ${pipeline.status} - ${pipeline.ref}`, 
+			label: `${arrIcon[index % arrIcon.length] || ''}   ${pipeline.id} - ${pipeline.status} - ${pipeline.ref}`, 
 			arguments: [pipeline.web_url] 
 		})
 	});

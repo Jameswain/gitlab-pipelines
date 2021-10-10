@@ -12,7 +12,6 @@ export async function activate(context: ExtensionContext) {
 	window.createTreeView('GitLab-Pipelines', { treeDataProvider: tvp, showCollapseAll: true });
 	context.subscriptions.push(commands.registerCommand('pipeline.click', (args) => {
 		window.showInformationMessage('点击pipeline选项');
-		console.log('args[0]=>', args)
 		commands.executeCommand('vscode.open', Uri.parse(args));
 	}));
 	const conf = await getConfig();

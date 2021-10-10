@@ -22,7 +22,7 @@
 			}
 		],
 		"views": {
-			"GitLab-Pipelines": [
+			"explorer": [
 				{
 					"id": "GitLab-Pipelines",
 					"name": "GitLab Pipelines"
