@@ -53,6 +53,7 @@ export async function updatePipelinesStatus(tvp: TreeViewProvider, config: any) 
 		'canceled': icon.canceled || ['⛔️']
 	};
 	pipelines = arrLastPipelines.map((pipeline: any) => {
+		// @ts-ignore
 		const arrIcon = MAP_CION[pipeline.status] || [];
 		return createMenu({ 
 			label: `${arrIcon[index % arrIcon.length] || ''}   ${pipeline.id} - ${pipeline.status} - ${pipeline.ref}`, 

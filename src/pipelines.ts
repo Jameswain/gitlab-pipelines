@@ -8,6 +8,7 @@ function gitUrlParser(url: string){
   const { hostname, path } = parse(giturl);
   return {
     domain: hostname,
+    // @ts-ignore
     project: path
       .replace('.git', '')
       .replace(/^\/\/?/, '')
@@ -16,6 +17,7 @@ function gitUrlParser(url: string){
 }
 
 const gitClient= () => { 
+  // @ts-ignore
   const ws = workspace.workspaceFolders[0];  // vscode 当前打开的目录
   return (...args: any) => execFileSync('git', [`--git-dir`, `${ws.uri.fsPath}/.git/`, ...args]).toString().trim();
 }
@@ -40,7 +42,7 @@ const getRepoInfo = () => {
     window.showErrorMessage(err as string);
     throw err;
   }
-});
+}
 
 const migrateV1toV2 = (userSettings: any): any => new Promise((resolve, reject) => {
   if ( userSettings.has('tokens') || userSettings.has('notifyOnFailed') || userSettings.has('interval')) {
