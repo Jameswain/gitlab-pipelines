@@ -8,8 +8,7 @@ function gitUrlParser(url: string){
   const { hostname, path } = parse(giturl);
   return {
     domain: hostname,
-    // @ts-ignore
-    project: path
+    project: (path || '')
       .replace('.git', '')
       .replace(/^\/\/?/, '')
       .trim()
@@ -17,8 +16,7 @@ function gitUrlParser(url: string){
 }
 
 const gitClient= () => { 
-  // @ts-ignore
-  const ws = workspace.workspaceFolders[0];  // vscode 当前打开的目录
+  const ws = (workspace.workspaceFolders || [])[0] || '';  // vscode 当前打开的目录
   return (...args: any) => execFileSync('git', [`--git-dir`, `${ws.uri.fsPath}/.git/`, ...args]).toString().trim();
 }
 

@@ -1,57 +1,72 @@
 {
-	"name": "gitlab-pipelines",
-	"publisher": "jameswain",
-	"displayName": "GitLab Pipelines",
-	"description": "GitLab Pipelines Monitor",
-	"version": "0.0.1",
-	"engines": {
-		"vscode": "^1.61.0"
-	},
-	"categories": [
-		"Other"
-	],
-	"activationEvents": [
-		"workspaceContains:.gitlab-ci.yml"
-	],
-	"main": "./out/extension.js",
-	"contributes": {
-		"commands": [
-			{
-				"command": "gitlab-pipelines.helloWorld",
-				"title": "Hello World"
-			}
-		],
-		"views": {
-			"explorer": [
-				{
-					"id": "GitLab-Pipelines",
-					"name": "GitLab Pipelines"
-				}
-			]
-		}
-	},
-	"scripts": {
-		"vscode:prepublish": "npm run compile",
-		"compile": "tsc -p ./",
-		"watch": "tsc -watch -p ./",
-		"pretest": "npm run compile && npm run lint",
-		"lint": "eslint src --ext ts",
-		"test": "node ./out/test/runTest.js"
-	},
-	"devDependencies": {
-		"@types/glob": "^7.1.4",
-		"@types/mocha": "^9.0.0",
-		"@types/node": "14.x",
-		"@types/vscode": "^1.61.0",
-		"@typescript-eslint/eslint-plugin": "^4.31.1",
-		"@typescript-eslint/parser": "^4.31.1",
-		"@vscode/test-electron": "^1.6.2",
-		"eslint": "^7.32.0",
-		"glob": "^7.1.7",
-		"mocha": "^9.1.1",
-		"typescript": "^4.4.3"
-	},
-	"dependencies": {
-		"axios": "^0.22.0"
-	}
+  "name": "gitlab-pipelines",
+  "publisher": "jameswain",
+  "displayName": "GitLab Pipelines",
+  "description": "GitLab Pipelines Monitor",
+  "version": "1.0.0",
+  "engines": {
+    "vscode": "^1.61.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "workspaceContains:.gitlab-ci.yml"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "gitlab-pipelines.helloWorld",
+        "title": "Hello World"
+      }
+    ],
+    "views": {
+      "explorer": [
+        {
+          "id": "GitLab-Pipelines",
+          "name": "GitLab Pipelines"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.1.4",
+    "@types/mocha": "^9.0.0",
+    "@types/node": "14.x",
+    "@types/vscode": "^1.61.0",
+    "@typescript-eslint/eslint-plugin": "^4.31.1",
+    "@typescript-eslint/parser": "^4.31.1",
+    "@vscode/test-electron": "^1.6.2",
+    "eslint": "^7.32.0",
+    "glob": "^7.1.7",
+    "mocha": "^9.1.1",
+    "typescript": "^4.4.3"
+  },
+  "dependencies": {
+    "axios": "^0.22.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jameswain/gitlab-pipelines.git"
+  },
+  "keywords": [
+    "GitLab",
+    "Pipeline",
+    "Monitor"
+  ],
+  "author": "jameswain",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jameswain/gitlab-pipelines/issues"
+  },
+  "homepage": "https://github.com/Jameswain/gitlab-pipelines#readme"
 }
