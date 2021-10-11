@@ -4,6 +4,7 @@
   "displayName": "GitLab Pipelines",
   "description": "GitLab Pipelines Monitor",
   "version": "1.0.0",
+  "icon": ".assets/logo.jpeg",
   "engines": {
     "vscode": "^1.61.0"
   },
@@ -11,16 +12,21 @@
     "Other"
   ],
   "activationEvents": [
-    "workspaceContains:.gitlab-ci.yml"
+    "workspaceContains:.gitlab-ci.yml",
+    "onCommand:gitlab-pipelines"
   ],
   "main": "./out/extension.js",
   "contributes": {
-    "commands": [
-      {
-        "command": "gitlab-pipelines.helloWorld",
-        "title": "Hello World"
+    "configuration": {
+      "type": "object",
+      "title": "GitLab Pipelines 配置可以在settings.json文件中编辑",
+      "properties": {
+        "GitLabPipelines": {
+          "type": "object",
+          "description": "配置详情见 https://wiki.inkept.cn/pages/viewpage.action?pageId=198821906 "
+        }
       }
-    ],
+    },
     "views": {
       "explorer": [
         {

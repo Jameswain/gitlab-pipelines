@@ -30,3 +30,7 @@
 创建 [Gitlab Personal Access Token](https://docs.gitlab.com/ce/user/profile/personal_access_tokens.html) 如下图所示：
 
 ![](https://img.ikstatic.cn/MTYzMzg3NDU5MzA1NSM2ODQjanBn.jpg)
+
+
+
+添加刷新命令

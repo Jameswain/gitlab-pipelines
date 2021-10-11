@@ -108,7 +108,6 @@ export const getConfig = async () => {
 export default async function getRunningPipelines(conf: any) {
   const getData = createGitLabClient(conf.apiUrl, conf.project, conf.token);
   if (!conf.token){
-    window.showErrorMessage(`No token for ${conf.domain}`);
     throw new Error(`No token for '${conf.domain}'`);
   }
   if (!conf.branch) conf.branch = [];
