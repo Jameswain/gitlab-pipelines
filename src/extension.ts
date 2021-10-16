@@ -18,7 +18,7 @@ export async function activate(context: ExtensionContext) {
 	updatePipelinesStatus(tvp, conf);
 	setInterval(() => {
 		updatePipelinesStatus(tvp, conf);
-	}, conf.interval || 3000);
+	}, conf.interval || 1000 * 5);
 }
 
 // this method is called when your extension is deactivated

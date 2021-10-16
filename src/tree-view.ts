@@ -48,7 +48,7 @@ export async function updatePipelinesStatus(tvp: TreeViewProvider, config: any) 
 	const MAP_CION = {
 		'success': icon.success || ['✅'],
 		'skipped': icon.skipped || ['🚥'],
-		'running': icon.running || ['🥩', '🍗', '🍖', '🍔', '🍞', '🥯', '🍟', '🍺', '🥃', '🍾', '🍹'],
+		'running': icon.running || ['🕘'], //['🥩', '🍗', '🍖', '🍔', '🍞', '🥯', '🍟', '🍺', '🥃', '🍾', '🍹'],
 		'failed': icon.failed || ['❌'],
 		'canceled': icon.canceled || ['⛔️']
 	};

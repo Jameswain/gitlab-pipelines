@@ -17,7 +17,15 @@ function gitUrlParser(url: string){
 
 const gitClient= () => { 
   const ws = (workspace.workspaceFolders || [])[0] || '';  // vscode 当前打开的目录
-  return (...args: any) => execFileSync('git', [`--git-dir`, `${ws.uri.fsPath}/.git/`, ...args]).toString().trim();
+  return (...args: any) => {
+    try {
+      // TODO 有可能会报错，待研究原因
+      return execFileSync('git', [`--git-dir`, `${ws.uri.fsPath}/.git/`, ...args]).toString().trim();
+    } catch (e) {
+      console.error(e);
+      return '';
+    }
+  }
 }
 
 const getRepoInfo = () => {
@@ -25,7 +33,7 @@ const getRepoInfo = () => {
     const git = gitClient();
 
     const branch = git('rev-parse', '--abbrev-ref', 'HEAD').trim();
-    const remote = git('config', '--get', `branch.${branch}.remote`);
+    const remote = git('config', '--get', `branch.${branch}.remote`) || 'origin';
     const url = git('config', '--get', `remote.${remote}.url`);
 
     const { domain, project } = gitUrlParser(url);
