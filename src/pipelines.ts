@@ -8,10 +8,7 @@ function gitUrlParser(url: string){
   const { hostname, path } = parse(giturl);
   return {
     domain: hostname,
-    project: (path || '')
-      .replace('.git', '')
-      .replace(/^\/\/?/, '')
-      .trim()
+    project: (path || '').replace('.git', '').replace(/^\/\/?/, '').trim()
   };
 }
 
@@ -67,8 +64,6 @@ const migrateV1toV2 = (userSettings: any): any => new Promise((resolve, reject) 
       }),
       {}
     );
-    console.log('Please migrate the configuration to the new format descibred here: https://marketplace.visualstudio.com/items?itemName=balazs4.gitlab-pipeline-monitor');
-    window.showWarningMessage('Please migrate the configuration to the new format descibred here: https://marketplace.visualstudio.com/items?itemName=balazs4.gitlab-pipeline-monitor');
     resolve(configV2);
   }
   resolve(userSettings);

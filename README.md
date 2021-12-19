@@ -1,4 +1,7 @@
-[![Version](https://vsmarketplacebadge.apphb.com/version-short/balazs4.gitlab-pipeline-monitor.svg?style=flat-square)](https://marketplace.visualstudio.com/items?itemName=balazs4.gitlab-pipeline-monitor)
+# 开发环境
+* node: v16.13.1
+* npm: v8.1.2
+* 系统: MacOS
 
 # GitLab Pipelines
 
@@ -30,7 +33,3 @@
 创建 [Gitlab Personal Access Token](https://docs.gitlab.com/ce/user/profile/personal_access_tokens.html) 如下图所示：
 
 ![](https://img.ikstatic.cn/MTYzMzg3NDU5MzA1NSM2ODQjanBn.jpg)
-
-
-
-添加刷新命令

@@ -4,14 +4,12 @@ import { window, commands, Uri, ExtensionContext } from 'vscode';
 import { TreeViewProvider, updatePipelinesStatus } from './tree-view';
 import { getConfig } from './pipelines';
 
-1
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export async function activate(context: ExtensionContext) {
 	const tvp = new TreeViewProvider();
 	window.createTreeView('GitLab-Pipelines', { treeDataProvider: tvp, showCollapseAll: true });
 	context.subscriptions.push(commands.registerCommand('pipeline.click', (args) => {
-		window.showInformationMessage('点击pipeline选项');
 		commands.executeCommand('vscode.open', Uri.parse(args));
 	}));
 	const conf = await getConfig();
