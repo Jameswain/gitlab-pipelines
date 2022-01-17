@@ -114,8 +114,12 @@ export async function getCurrentRunningJob(conf: any) {
   if (!conf.token){
     throw new Error(`No token for '${conf.domain}'`);
   }
-  const arrJobs = await getData(`/pipelines/${conf?.pipeline?.id}/jobs?scope=running`);
-  return arrJobs[0];
+  try {
+    const arrJobs = await getData(`/pipelines/${conf?.pipeline?.id}/jobs?scope=running`);
+    return arrJobs[0] || {};
+  } catch (e) {
+    return {};
+  }
 }
 
 /**
