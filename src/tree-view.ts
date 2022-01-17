@@ -1,5 +1,5 @@
 import { TreeItem, TreeDataProvider,TreeItemCollapsibleState, ProviderResult, window, Event, EventEmitter, ExtensionContext } from 'vscode';
-import getRunningPipelines from './pipelines';
+import getRunningPipelines, { getCurrentRunningJob } from './pipelines';
 
 type Menu = {
 	label: string,
@@ -49,11 +49,13 @@ export async function updatePipelinesStatus(tvp: TreeViewProvider, config: any) 
 		'failed': icon.failed || ['❌'],
 		'canceled': icon.canceled || ['⛔️']
 	};
-	pipelines = arrLastPipelines.map((pipeline: any) => {
+	pipelines = arrLastPipelines.map(async (pipeline: any) => {
+		const job = await getCurrentRunningJob({ ...config, pipeline });
+		const status = job.name ? `[${job.name}]` : pipeline.status;
 		// @ts-ignore
 		const arrIcon = MAP_CION[pipeline.status] || [];
 		return createMenu({ 
-			label: `${arrIcon[0] || ''}   ${pipeline.id} - ${pipeline.status} - ${pipeline.ref}`, 
+			label: `${arrIcon[0] || ''}   ${pipeline.id} - ${status} - ${pipeline.ref}`, 
 			arguments: [pipeline.web_url] 
 		})
 	});

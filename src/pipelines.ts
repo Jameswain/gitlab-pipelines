@@ -106,6 +106,19 @@ export const getConfig = async () => {
 }
 
 /**
+ * 获取当前正在运行的job
+ */
+export async function getCurrentRunningJob(conf: any) {
+  if (conf?.pipeline?.status !== 'running') return {};
+  const getData = createGitLabClient(conf.apiUrl, conf.project, conf.token);
+  if (!conf.token){
+    throw new Error(`No token for '${conf.domain}'`);
+  }
+  const arrJobs = await getData(`/pipelines/${conf?.pipeline?.id}/jobs?scope=running`);
+  return arrJobs[0];
+}
+
+/**
  * 获取最近运行的20条pipeline
  */
 export default async function getRunningPipelines(conf: any) {
