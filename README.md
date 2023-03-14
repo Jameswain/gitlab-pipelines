@@ -1,9 +1,3 @@
-# Development Environment - 开发环境
-
-- node: v16.13.1
-- npm: v8.1.2
-- Operating System - 系统: MacOS
-
 # GitLab Pipelines
 
 :us: This extension can monitor 20 GitLab Pipelines in Realtime
@@ -40,3 +34,10 @@
 创建 [Gitlab Personal Access Token](https://docs.gitlab.com/ce/user/profile/personal_access_tokens.html) 如下图所示：
 
 ![](https://img.ikstatic.cn/MTYzMzg3NDU5MzA1NSM2ODQjanBn.jpg)
+
+
+# Development Environment - 开发环境
+
+- node: v16.13.1
+- npm: v8.1.2
+- Operating System - 系统: MacOS

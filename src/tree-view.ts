@@ -38,16 +38,19 @@ export class TreeViewProvider implements TreeDataProvider<TreeItem> {
 	}
 }
 
+let index = 0;
 export async function updatePipelinesStatus(tvp: TreeViewProvider, config: any) {
+	index = (index + 1) % 100;
 	const arrLastPipelines = await getRunningPipelines(config);
 	const icon = config.icon || {};
 	const MAP_CION = {
 		'success': icon.success || ['✅'],
 		'manual': icon.manual || ['🚥'],
 		'skipped': icon.skipped || ['🚆'],
-		'running': icon.running || ['🕘'],
+		'running': icon.running || ['🏃🏼', '🏃🏼‍♂️', '🏃🏼'],
 		'failed': icon.failed || ['❌'],
-		'canceled': icon.canceled || ['⛔️']
+		'canceled': icon.canceled || ['⛔️'],
+		'pending': icon.pending || ['⌛️']
 	};
 	pipelines = arrLastPipelines.map(async (pipeline: any) => {
 		const job = await getCurrentRunningJob({ ...config, pipeline });
@@ -55,9 +58,9 @@ export async function updatePipelinesStatus(tvp: TreeViewProvider, config: any) 
 		// @ts-ignore
 		const arrIcon = MAP_CION[pipeline.status] || [];
 		return createMenu({ 
-			label: `${arrIcon[0] || ''}   ${pipeline.id} - ${status} - ${pipeline.ref}`, 
+			label: `${arrIcon[index % arrIcon.length] || ''}   ${pipeline.id} - ${status} - ${pipeline.ref}`, 
 			arguments: [pipeline.web_url] 
-		})
+		});
 	});
 	tvp.refresh();
 }

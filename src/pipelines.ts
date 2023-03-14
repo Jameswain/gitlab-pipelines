@@ -85,16 +85,20 @@ export const getExtensionSettings = async (domain: string) => {
 
 const createGitLabClient = (apiUrl: string, project: string, token: string): any => {
   const url = (_: any) => `${apiUrl}/projects/${encodeURIComponent(project)}${_}`;
-  return (endpoint: string) => {
+  return async (endpoint: string) => {
     const uri = url(endpoint);
-    return axios({
-      url: uri,
-      headers: {
-        'PRIVATE-TOKEN': token
-      }
-    }).then(res => {
-      return (res.data || []);
-    })
+    try {
+      const { data } = await axios({
+        url: uri,
+        headers: {
+          'PRIVATE-TOKEN': token
+        }
+      });
+      return data || [];
+    } catch (e) {{
+      console.error(e);
+      return [];
+    }}
   }
 }
 
