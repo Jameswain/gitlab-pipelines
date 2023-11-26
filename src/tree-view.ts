@@ -75,7 +75,7 @@ export async function updatePipelinesStatus(tvp: TreeViewProvider, config: any) 
 		let label = `${arrIcon[index % arrIcon.length] || ''}   ${pipeline.id} - ${status} - ${pipeline.ref}`;
 		const meta = mapPilelines[pipeline.id];
 		if (meta) {
-			label = [`${arrIcon[index % arrIcon.length] || ''}`, pipeline.id, meta.app_name, pipeline.ref].join(' - ');
+			label = `${arrIcon[index % arrIcon.length] || ''}  ` + [pipeline.id, meta.app_name, pipeline.ref].join(' - ');
 		}
 
 		return createMenu({ 
