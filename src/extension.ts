@@ -1,12 +1,13 @@
 // The module 'vscode' contains the VS Code extensibility API
 // Import the module and reference it with the alias vscode in your code below
 import { window, commands, Uri, ExtensionContext } from 'vscode';
-import { TreeViewProvider, updatePipelinesStatus } from './tree-view';
+import { TreeViewProvider, updatePipelinesStatus, registerExtension } from './tree-view';
 import { getConfig } from './pipelines';
 
 // this method is called when your extension is activated
 // your extension is activated the very first time the command is executed
 export async function activate(context: ExtensionContext) {
+	registerExtension(context);
 	const tvp = new TreeViewProvider();
 	window.createTreeView('GitLab-Pipelines', { treeDataProvider: tvp, showCollapseAll: true });
 	context.subscriptions.push(commands.registerCommand('pipeline.click', (args) => {

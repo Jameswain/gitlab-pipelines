@@ -1,4 +1,4 @@
-import { workspace, TreeItem, TreeDataProvider,TreeItemCollapsibleState, ProviderResult, window, Event, EventEmitter, ExtensionContext } from 'vscode';
+import { workspace, TreeItem, TreeDataProvider,TreeItemCollapsibleState, ProviderResult, window, Event, EventEmitter, StatusBarAlignment, ExtensionContext } from 'vscode';
 import getRunningPipelines, { getCurrentRunningJob } from './pipelines';
 import { readFileSync } from 'fs';
 import { join } from 'path';
@@ -8,17 +8,7 @@ type Menu = {
 	arguments: string[]
 };
 
-function readDiskPipelineInfo():any {
-	const root = (workspace.workspaceFolders || [{ uri: { path:'' } }])[0];
-	const diskPath = join(root.uri.path || '', 'node_modules', 'pipelines.json');
-	let mapPilelines = {};
-	try {
-		mapPilelines = JSON.parse(readFileSync(diskPath, 'utf8'));
-	} catch (e) {
-		mapPilelines = {};
-	}
-	return mapPilelines;
-}
+const root = (workspace.workspaceFolders || [{ uri: { path:'' } }])[0];
 
 function createMenu(menu: Menu): TreeItem {
 	return {
@@ -30,11 +20,54 @@ function createMenu(menu: Menu): TreeItem {
 			command: 'pipeline.click',
 			arguments: menu.arguments
 		}
+	};
+}
+
+const createStatusBarItem = () => {
+  const item = window.createStatusBarItem(StatusBarAlignment.Left, -Infinity);
+  item.show();
+  item.command = 'pipeline.openInBrowser';
+  return Object.assign({}, item, {
+    showText: (text:string) => {
+      item.text = text;
+    },
+  });
+};
+
+let showText:(text: string) => void;
+export const registerExtension = (context: ExtensionContext) => {
+  const item = createStatusBarItem();
+  context.subscriptions.push(item);
+	showText = item.showText;
+  return showText;
+};
+
+function readDiskPipelineInfo():any {
+	const diskPath = join(root.uri.path || '', 'node_modules', 'pipelines.json');
+	let mapPilelines = {};
+	try {
+		mapPilelines = JSON.parse(readFileSync(diskPath, 'utf8'));
+	} catch (e) {
+		mapPilelines = {};
+	}
+	return mapPilelines;
+}
+
+function readBootConf() {
+	const diskPath = join(root.uri.path || '', 'boot.conf');
+	try {
+		const arrBootConf = JSON.parse(readFileSync(diskPath, 'utf8'));
+		if (arrBootConf.arrAppNames) {
+			showText(' 🎾 ' + arrBootConf.arrAppNames.join(' 🎾 '));
+		} else {
+			showText(' 🎾 ' + arrBootConf.map((o:any) => o.app_name).join(' 🎾 '));
+		}
+	} catch (e) {
+		showText('');
 	}
 }
 
 let pipelines:any = [];
-
 export class TreeViewProvider implements TreeDataProvider<TreeItem> {
 	private _onDidChangeTreeData: EventEmitter<any> = new EventEmitter<any>();
 	readonly onDidChangeTreeData: Event<any> = this._onDidChangeTreeData.event;
@@ -56,6 +89,7 @@ let index = 0;
 export async function updatePipelinesStatus(tvp: TreeViewProvider, config: any) {
 	index = (index + 1) % 100;
 	const arrLastPipelines = await getRunningPipelines(config);
+	readBootConf();
 	const mapPilelines = readDiskPipelineInfo();
 	const icon = config.icon || {};
 	const MAP_CION = {
