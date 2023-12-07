@@ -56,11 +56,11 @@ function readDiskPipelineInfo():any {
 function readBootConf() {
 	const diskPath = join(root.uri.path || '', 'boot.conf');
 	try {
-		const arrBootConf = JSON.parse(readFileSync(diskPath, 'utf8'));
-		if (arrBootConf.arrAppNames) {
-			showText(' 🎾 ' + arrBootConf.arrAppNames.join(' 🎾 '));
+		const bootConf = JSON.parse(readFileSync(diskPath, 'utf8'));
+		if (bootConf.arrAppNames) {
+			showText(' 🎾 ' + bootConf.arrAppNames.join('⚡️') + `   🧠  ${bootConf.arrStartConfPath.join('⚡️')}`);
 		} else {
-			showText(' 🎾 ' + arrBootConf.map((o:any) => o.app_name).join(' 🎾 '));
+			showText(' 🎾 ' + bootConf.map((o:any) => o.app_name).join(' 🎾 '));
 		}
 	} catch (e) {
 		showText('');
