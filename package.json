@@ -3,7 +3,7 @@
   "publisher": "jameswain",
   "displayName": "GitLab Pipelines",
   "description": "GitLab Pipelines Monitor",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "icon": ".assets/logo.png",
   "engines": {
     "vscode": "^1.61.0"
