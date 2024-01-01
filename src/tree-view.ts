@@ -60,7 +60,8 @@ function readBootConf() {
 		if (bootConf.arrAppNames) {
 			showText(' 🎾 ' + bootConf.arrAppNames.join('⚡️') + `   🧠  ${bootConf.arrStartConfPath.join('⚡️')}`);
 		} else {
-			showText(' 🎾 ' + bootConf.map((o:any) => o.app_name).join(' 🎾 '));
+			const { game_key } = bootConf[0];
+			showText(' 🎾 ' + bootConf.map((o:any) => o.app_name).join(' 🎾 ') + `  🧠  ${game_key}`);
 		}
 	} catch (e) {
 		showText('');
