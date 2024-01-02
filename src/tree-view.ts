@@ -1,4 +1,4 @@
-import { workspace, TreeItem, TreeDataProvider,TreeItemCollapsibleState, ProviderResult, window, Event, EventEmitter, StatusBarAlignment, ExtensionContext } from 'vscode';
+import { TreeItem, TreeDataProvider,TreeItemCollapsibleState, ProviderResult, window, Event, EventEmitter, StatusBarAlignment, ExtensionContext, StatusBarItem, commands, workspace } from 'vscode';
 import getRunningPipelines, { getCurrentRunningJob } from './pipelines';
 import { readFileSync } from 'fs';
 import { join } from 'path';
@@ -23,10 +23,23 @@ function createMenu(menu: Menu): TreeItem {
 	};
 }
 
+// 注册自定义事件
+commands.registerCommand('extension.openBootConf', () => {
+	const filePath = join(root.uri.path || '', 'boot.conf');  
+	// 打开文件  
+	workspace.openTextDocument(filePath).then(document => {  
+		if (document) {  
+			window.showTextDocument(document);  
+		} else {  
+			window.showErrorMessage('Failed to open boot.conf file.');  
+		}  
+	});
+});
+
 const createStatusBarItem = () => {
-  const item = window.createStatusBarItem(StatusBarAlignment.Left, -Infinity);
+  const item:StatusBarItem = window.createStatusBarItem(StatusBarAlignment.Left, -Infinity);
   item.show();
-  item.command = 'pipeline.openInBrowser';
+	item.command = 'extension.openBootConf';
   return Object.assign({}, item, {
     showText: (text:string) => {
       item.text = text;
