@@ -123,7 +123,7 @@ export async function updatePipelinesStatus(tvp: TreeViewProvider, config: any) 
 		let label = `${arrIcon[index % arrIcon.length] || ''}   ${pipeline.id} - ${status} - ${pipeline.ref}`;
 		const meta = mapPilelines[pipeline.id];
 		if (meta) {
-			label = `${arrIcon[index % arrIcon.length] || ''}  ` + [pipeline.id, meta.app_name, pipeline.ref, meta.PLATFORM].join(' - ');
+			label = `${arrIcon[index % arrIcon.length] || ''}  ` + [pipeline.id, meta.app_name, pipeline.ref, meta.game_key, meta.PLATFORM].filter(Boolean).join(' - ');
 		}
 
 		return createMenu({ 
