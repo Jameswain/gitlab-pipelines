@@ -70,11 +70,15 @@ function readBootConf() {
 	const diskPath = join(root.uri.path || '', 'boot.conf');
 	try {
 		const bootConf = JSON.parse(readFileSync(diskPath, 'utf8'));
+		let loc = [bootConf.cluster, bootConf.deploy_location].filter(Boolean).join('⚡️');
+		loc = loc ? ' 🔥 ' + loc : '';
 		if (bootConf.arrAppNames) {
-			showText(' 🎾 ' + bootConf.arrAppNames.join('⚡️') + `   🧠  ${bootConf.arrStartConfPath.join('⚡️')}`);
+			showText(' 🎾 ' + bootConf.arrAppNames.join('⚡️') + ` 🧠  ${bootConf.arrStartConfPath.join('⚡️')} ${loc}`);
 		} else {
-			const { game_key } = bootConf[0];
-			showText(' 🎾 ' + bootConf.map((o:any) => o.app_name).join(' 🎾 ') + `  🧠  ${game_key}`);
+			const { game_key, cluster, deploy_location } = bootConf[0];
+			let loc = [cluster, deploy_location].filter(Boolean).join('⚡️');
+			loc = loc ? ' 🔥 ' + loc : '';
+			showText(' 🎾 ' + bootConf.map((o:any) => o.app_name).join(' 🎾 ') + ` 🧠  ${game_key}` + loc);
 		}
 	} catch (e) {
 		showText('');
