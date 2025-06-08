@@ -1,6 +1,6 @@
 import { parse } from 'url';
 import { window, workspace } from 'vscode';
-import { execFileSync, execSync } from 'child_process';
+import { execFileSync, exec } from 'child_process';
 import axios from 'axios';
 
 function gitUrlParser(url: string){
@@ -96,8 +96,19 @@ const createGitLabClient = (apiUrl: string, project: string, token: string): any
       });
       return data || [];
     } catch (e) {{
-      console.error(e);
-      return [];
+      // console.error(e);
+      // 解决兼容性问题吧，我的电脑，发起https请求就会报错，真麻烦
+      return new Promise((resolve, reject) => {
+        exec(`curl -v --insecure --header "PRIVATE-TOKEN: ${token}" ${uri}`, (error, stdout) => {
+          if (error) { return resolve([]); }
+          try {
+            resolve(JSON.parse(stdout));
+          } catch (e) {
+            resolve([]);
+          }
+        });
+      });
+      
     }}
   }
 }

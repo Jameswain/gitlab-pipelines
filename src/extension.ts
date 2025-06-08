@@ -14,10 +14,19 @@ export async function activate(context: ExtensionContext) {
 		commands.executeCommand('vscode.open', Uri.parse(args));
 	}));
 	const conf = await getConfig();
-	updatePipelinesStatus(tvp, conf);
-	setInterval(() => {
-		updatePipelinesStatus(tvp, conf);
+	const tid = setInterval(() => {
+		try {
+			updatePipelinesStatus(tvp, conf);
+		} catch (e) {
+			console.error(e);
+			clearInterval(tid);
+		}
 	}, conf.interval || 1000 * 5);
+	try {
+		updatePipelinesStatus(tvp, conf);
+	} catch (e) {
+		clearInterval(tid);
+	}
 }
 
 // this method is called when your extension is deactivated
